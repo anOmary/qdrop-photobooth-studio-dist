@@ -1,0 +1,287 @@
+{
+  "catalog": 1,
+  "probe": {
+    "version": "0.1.0",
+    "download": "https://github.com/anOmary/qdrop-photobooth-studio-dist/releases/latest",
+    "note": null
+  },
+  "suites": [
+    {
+      "suite": "canon-eos-r",
+      "title": "Canon EOS ตระกูล R",
+      "vocabulary": 1,
+      "match": {
+        "vendorId": "0x04A9"
+      },
+      "steps": [
+        {
+          "do": "usbScan"
+        },
+        {
+          "do": "openSession",
+          "timeout": 15
+        },
+        {
+          "do": "deviceInfo"
+        },
+        {
+          "do": "ptp",
+          "op": "0x9114",
+          "params": [
+            1
+          ]
+        },
+        {
+          "do": "ptp",
+          "op": "0x9115",
+          "params": [
+            1
+          ]
+        },
+        {
+          "do": "ptp",
+          "op": "0x9110",
+          "payload": [
+            12,
+            53680,
+            2
+          ]
+        },
+        {
+          "do": "delay",
+          "seconds": 0.7
+        },
+        {
+          "do": "pullLoop",
+          "op": "0x9153",
+          "params": [
+            1048576,
+            1
+          ],
+          "seconds": 5,
+          "frame": "canonChunk"
+        },
+        {
+          "do": "capture",
+          "press": {
+            "op": "0x9128",
+            "params": [
+              3,
+              0
+            ]
+          },
+          "release": {
+            "op": "0x9129",
+            "params": [
+              3
+            ]
+          },
+          "shots": 1,
+          "waitSeconds": 12,
+          "detect": "eosEvent"
+        },
+        {
+          "do": "ptp",
+          "op": "0x9110",
+          "payload": [
+            12,
+            53680,
+            0
+          ]
+        },
+        {
+          "do": "ptp",
+          "op": "0x9114",
+          "params": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "suite": "nikon-z",
+      "title": "Nikon Z (ทดสอบความสามารถก่อนรับรองรายรุ่น)",
+      "vocabulary": 1,
+      "match": {
+        "vendorId": "0x04B0"
+      },
+      "steps": [
+        {
+          "do": "usbScan"
+        },
+        {
+          "do": "openSession",
+          "timeout": 15
+        },
+        {
+          "do": "deviceInfo"
+        },
+        {
+          "do": "ptp",
+          "op": "0x90C8"
+        },
+        {
+          "do": "ptp",
+          "op": "0x9202"
+        },
+        {
+          "do": "ptp",
+          "op": "0x9201"
+        },
+        {
+          "do": "delay",
+          "seconds": 0.7
+        },
+        {
+          "do": "pullLoop",
+          "op": "0x9203",
+          "seconds": 5,
+          "frame": "scanJpeg"
+        },
+        {
+          "do": "ptp",
+          "op": "0x9202"
+        },
+        {
+          "do": "capture",
+          "press": {
+            "op": "0x9207",
+            "params": [
+              4294967295,
+              0
+            ]
+          },
+          "shots": 1,
+          "waitSeconds": 12,
+          "detect": "nikonEvent"
+        }
+      ]
+    },
+    {
+      "suite": "sony-alpha",
+      "title": "Sony α (ต้องตั้งกล้องเป็น PC Remote ก่อน)",
+      "vocabulary": 1,
+      "match": {
+        "vendorId": "0x054C"
+      },
+      "steps": [
+        {
+          "do": "usbScan"
+        },
+        {
+          "do": "openSession",
+          "timeout": 15
+        },
+        {
+          "do": "deviceInfo"
+        },
+        {
+          "do": "ptp",
+          "op": "0x9201",
+          "params": [
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "do": "ptp",
+          "op": "0x9201",
+          "params": [
+            2,
+            0,
+            0
+          ]
+        },
+        {
+          "do": "ptp",
+          "op": "0x9202",
+          "params": [
+            200
+          ]
+        },
+        {
+          "do": "ptp",
+          "op": "0x9201",
+          "params": [
+            3,
+            0,
+            0
+          ]
+        },
+        {
+          "do": "delay",
+          "seconds": 0.7
+        },
+        {
+          "do": "pullLoop",
+          "op": "0x1009",
+          "params": [
+            4294950914
+          ],
+          "seconds": 5,
+          "frame": "scanJpeg"
+        },
+        {
+          "do": "capture",
+          "press": [
+            {
+              "op": "0x9207",
+              "params": [
+                53953
+              ],
+              "bytes": "0200",
+              "delayAfter": 0.6
+            },
+            {
+              "op": "0x9207",
+              "params": [
+                53954
+              ],
+              "bytes": "0200"
+            }
+          ],
+          "release": [
+            {
+              "op": "0x9207",
+              "params": [
+                53954
+              ],
+              "bytes": "0100"
+            },
+            {
+              "op": "0x9207",
+              "params": [
+                53953
+              ],
+              "bytes": "0100"
+            }
+          ],
+          "shots": 1,
+          "waitSeconds": 12,
+          "detect": "sonyObject"
+        }
+      ]
+    },
+    {
+      "suite": "unknown",
+      "title": "กล้องที่ยังไม่รู้จัก — เก็บสิ่งที่กล้องบอกเองเท่านั้น",
+      "vocabulary": 1,
+      "match": {
+        "fallback": true
+      },
+      "steps": [
+        {
+          "do": "usbScan"
+        },
+        {
+          "do": "openSession",
+          "timeout": 15
+        },
+        {
+          "do": "deviceInfo"
+        }
+      ]
+    }
+  ]
+}
