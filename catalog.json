@@ -122,6 +122,14 @@
         },
         {
           "do": "ptp",
+          "id": "nikon-focus-mode",
+          "op": "0x1015",
+          "params": [
+            20490
+          ]
+        },
+        {
+          "do": "ptp",
           "op": "0x9202"
         },
         {
@@ -148,7 +156,7 @@
               4294967295
             ]
           },
-          "shots": 1,
+          "shots": 3,
           "waitSeconds": 12,
           "detect": "nikonEvent"
         },
