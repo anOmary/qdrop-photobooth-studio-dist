@@ -140,13 +140,12 @@
         },
         {
           "do": "capture",
-          "id": "nikon-capture-liveview-two-params",
+          "id": "nikon-capture-liveview-sdram",
           "fallbackGroup": "nikon-capture",
           "press": {
-            "op": "0x9207",
+            "op": "0x90C0",
             "params": [
-              4294967295,
-              0
+              4294967295
             ]
           },
           "shots": 1,
@@ -155,12 +154,13 @@
         },
         {
           "do": "capture",
-          "id": "nikon-capture-liveview-one-param",
+          "id": "nikon-capture-liveview-media-default",
           "fallbackGroup": "nikon-capture",
           "press": {
             "op": "0x9207",
             "params": [
-              4294967295
+              0,
+              0
             ]
           },
           "shots": 1,
@@ -177,13 +177,12 @@
         },
         {
           "do": "capture",
-          "id": "nikon-capture-no-liveview-two-params",
+          "id": "nikon-capture-no-liveview-sdram",
           "fallbackGroup": "nikon-capture",
           "press": {
-            "op": "0x9207",
+            "op": "0x90C0",
             "params": [
-              4294967295,
-              0
+              4294967295
             ]
           },
           "shots": 1,
@@ -192,14 +191,10 @@
         },
         {
           "do": "capture",
-          "id": "nikon-capture-no-liveview-autofocus",
+          "id": "nikon-capture-standard",
           "fallbackGroup": "nikon-capture",
           "press": {
-            "op": "0x9207",
-            "params": [
-              4294967294,
-              0
-            ]
+            "op": "0x100E"
           },
           "shots": 1,
           "waitSeconds": 12,
