@@ -1,9 +1,9 @@
 {
   "catalog": 1,
   "probe": {
-    "version": "0.2.2",
-    "download": "https://github.com/anOmary/qdrop-photobooth-studio-dist/releases/download/camera-probe-v0.2.2/CameraProbe-0.2.2.dmg",
-    "note": "เลือกกล้องจริงเมื่อเสียบผ่าน USB hub และเพิ่ม Nikon dynamic capture"
+    "version": "0.2.3",
+    "download": "https://github.com/anOmary/qdrop-photobooth-studio-dist/releases/download/camera-probe-v0.2.3/CameraProbe-0.2.3.dmg",
+    "note": "เพิ่มปุ่มตรวจอีกครั้ง โหลดชุดทดสอบใหม่โดยไม่ต้องปิดแอป"
   },
   "suites": [
     {
