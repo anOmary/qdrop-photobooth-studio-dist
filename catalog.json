@@ -1,9 +1,9 @@
 {
   "catalog": 1,
   "probe": {
-    "version": "0.1.0",
-    "download": "https://github.com/anOmary/qdrop-photobooth-studio-dist/releases/latest",
-    "note": null
+    "version": "0.2.1",
+    "download": "https://github.com/anOmary/qdrop-photobooth-studio-dist/releases/download/camera-probe-v0.2.1/CameraProbe-0.2.1.dmg",
+    "note": "เลือกกล้องจริงเมื่อเสียบผ่าน USB hub และเพิ่ม Nikon dynamic capture"
   },
   "suites": [
     {
@@ -101,7 +101,7 @@
     {
       "suite": "nikon-z",
       "title": "Nikon Z (ทดสอบความสามารถก่อนรับรองรายรุ่น)",
-      "vocabulary": 1,
+      "vocabulary": 2,
       "match": {
         "vendorId": "0x04B0"
       },
@@ -139,15 +139,65 @@
           "frame": "scanJpeg"
         },
         {
-          "do": "ptp",
-          "op": "0x9202"
-        },
-        {
           "do": "capture",
+          "id": "nikon-capture-liveview-two-params",
+          "fallbackGroup": "nikon-capture",
           "press": {
             "op": "0x9207",
             "params": [
               4294967295,
+              0
+            ]
+          },
+          "shots": 1,
+          "waitSeconds": 12,
+          "detect": "nikonEvent"
+        },
+        {
+          "do": "capture",
+          "id": "nikon-capture-liveview-one-param",
+          "fallbackGroup": "nikon-capture",
+          "press": {
+            "op": "0x9207",
+            "params": [
+              4294967295
+            ]
+          },
+          "shots": 1,
+          "waitSeconds": 12,
+          "detect": "nikonEvent"
+        },
+        {
+          "do": "ptp",
+          "op": "0x9202"
+        },
+        {
+          "do": "delay",
+          "seconds": 0.5
+        },
+        {
+          "do": "capture",
+          "id": "nikon-capture-no-liveview-two-params",
+          "fallbackGroup": "nikon-capture",
+          "press": {
+            "op": "0x9207",
+            "params": [
+              4294967295,
+              0
+            ]
+          },
+          "shots": 1,
+          "waitSeconds": 12,
+          "detect": "nikonEvent"
+        },
+        {
+          "do": "capture",
+          "id": "nikon-capture-no-liveview-autofocus",
+          "fallbackGroup": "nikon-capture",
+          "press": {
+            "op": "0x9207",
+            "params": [
+              4294967294,
               0
             ]
           },
